@@ -1,0 +1,25 @@
+1.	Run the cloudformation script in https://gitlab.com/lahirumal/aws_assignment
+2.	Since cloudformation script uses private AMIs and the AMI ID values in the environment.json file must be changed in order to execute under 	a different AWS account.
+3.	Install httpd in the web instances using ‘yum install httpd’
+4.	Install postfix and mailx using ‘yum install postfix’ and ‘yum install mailx’ in monitoring instance. 
+5.	Copy the configuration files as provided in the folder to the required locations as mentioned below.
+	1.	.my.cnf -> /home/centos/.my.cnf in Monitoring server (AMI)
+	2.	assignment.com.conf -> /etc/httpd/conf.d/assignment.com.conf in web instances (AMI)
+	3.	httpd.conf -> /etc/httpd/conf/httpd.conf in web instances (AMI)
+	4.	main.cf -> /etc/postfix/main.cf in Monitoring server (AMI)
+	5.	sasl_password -> /etc/postfix/sasl_passwd ( Run postmap  /etc/postfix/sasl_passwd) in Monitoring server (AMI)
+	6.	script1.sh -> /home/centos/script1.sh
+	7.	script2.sh -> /home/centos/script2.sh
+6.	Both the scripts are recommended to be copied to a home folder of the user (centos) that the scripts are being executed and the below 	 contrab entries must be placed under the particular user in each server
+	1.	Web application nodes.
+		i.	59 23 * * * sh /home/centos/log_rotate.sh > /dev/null 2>&1
+	2.	Monitoring node (Based on the time interval to execute the periodic check and log extraction – every 30 minutes).
+		i.	*/30 * * * * sh /home/centos/script1.sh > /dev/null 2>&1
+		ii.	00 00 * * * sh /home/centos/script2.sh > /dev/null 2>&1
+7.	It is recommended to create two AMIs using the above steps and then pass the AMI IDs to the cloudformation script which will automate the process. Before executing the cloudformation script, an IAM role with the name ‘awsassignmentIAM’ needed to be created with the below policies.
+	1.	AutoScalingReadOnlyAccess
+	2.	AmazonS3FullAccess
+	3.	EC2InstanceConnect
+8.	SSH key pair needed to be created in the name “AWS_Assignment_AMI” in order to access the servers via ssh. Key will be applied to each instances via the cloudformation script.
+9.	Once everything is ready execute the below command to create the cloudformation stack using the cloudformation.yaml and environment.json file in the local PC.
+	1.	aws cloudformation create-stack --stack-name startmyinstance --template-body file://cloudformation.yaml --parameters file://environment.json

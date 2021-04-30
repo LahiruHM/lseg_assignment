@@ -1,0 +1,47 @@
+[
+  {
+  "ParameterKey": "EnvironmentName",
+  "ParameterValue": "LSEG"
+  },
+
+  {
+    "ParameterKey": "MasterUsername",
+    "ParameterValue": "admin"
+  },
+
+  {
+    "ParameterKey": "MasterUserPassword",
+    "ParameterValue": "1qaz2wsx"
+  },
+
+  {
+    "ParameterKey": "ParameterGroup",
+    "ParameterValue": "rdsparam"
+  },
+
+  {
+    "ParameterKey": "HostedZoneName",
+    "ParameterValue": "lahirumal.com."
+  },
+
+  {
+    "ParameterKey": "WriterDNSName",
+    "ParameterValue": "lseg.rds.writer"
+  },
+
+  {
+    "ParameterKey": "ReaderDNSName",
+    "ParameterValue": "lseg.rds.reader"
+  },
+
+  {
+    "ParameterKey": "webserverAMI",
+    "ParameterValue":"ami-0d140d431ef935616"
+  },
+
+  {
+    "ParameterKey": "monserverAMI",
+    "ParameterValue":"ami-0a6730a723899a221"
+  }
+
+]

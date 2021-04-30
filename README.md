@@ -1,1 +1,1 @@
-# lseg_assignment
+# Instructions are provided in the instructions.txt
